@@ -17,15 +17,29 @@ btn.addEventListener('click', function () {
         li.appendChild(span)
     }
     inputBox.value = '';
+    saveData();
 });
 
 // Check task
 listContainer.addEventListener('click', function (e) {
     if (e.target.tagName === 'LI') {
         e.target.classList.toggle('checked');
+        saveData();
     }
     // delete task
     else if (e.target.tagName === 'SPAN') {
         e.target.parentElement.remove();
+        saveData();
     }
 }, false);
+
+// Save data in browser
+ function saveData () {
+    localStorage.setItem("data", listContainer.innerHTML);
+ };
+
+ function showTask(){
+    listContainer.innerHTML = localStorage.getItem("data")
+ };
+
+ showTask();
